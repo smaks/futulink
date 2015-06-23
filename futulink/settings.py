@@ -52,11 +52,11 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'futulink.urls'
-
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(PROJECT_ROOT, 'static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
