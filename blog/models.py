@@ -15,6 +15,7 @@ class Post(models.Model):
 
     def publish(self):
         self.published_date = timezone.now()
+        self.save()
 
     def __unicode__(self):
         return '%s' % self.title
@@ -24,7 +25,7 @@ class Post(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_post', None, { 'slug': self.slug })
+        return ('blog:view_post', None, { 'slug': self.slug })
 
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
@@ -38,7 +39,7 @@ class Category(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('view_category', None, { 'slug': self.slug })
+        return ('blog:view_category', None, { 'slug': self.slug })
 
 class Tag(models.Model):
     title = models.CharField(max_length=100, db_index=True)
@@ -46,4 +47,25 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.slug
+
+    @permalink
+    def get_absolute_url(self):
+        return ('blog:view_tag', None, { 'slug': self.slug })
+
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Post', related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+    def approved_comments(self):
+        return self.comments.filter(approved=True)
 

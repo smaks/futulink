@@ -1,0 +1,7 @@
+{% extends 'base.html' %} 
+{% block head_title %}{{ tag.title }}{% endblock %}
+
+{% block content %}
+    <h2> {{ tag.title }} </h2>
+    {{ tag.slug }}
+{% endblock %}

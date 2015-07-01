@@ -2,15 +2,23 @@
 {% block head_title %}Welcome to my blog{% endblock %}
 
 {% block content %}
-    <h2>Posts</h2>
+    <div>
+        <h2>Posts<a href="{% url 'blog:post_new' %}"><span class="glyphicon glyphicon-file"></span></a>
+        <a href="{% url 'blog:post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+        </h2>
+    </div>
     {% if latest_post_list %}
         <ul>
         {% for post in latest_post_list %}
-            <li><a href="{% url 'blog:view_post' post.slug %}">{{ post.title }}</a></li>
+            <li><a href="{% url 'blog:view_post' post.slug %}">{{ post.title }}</a>
+            <a href="{% url 'blog:view_category' post.category.slug %}">{{ post.category.title }}</a></li>
+
         {% endfor %}
         </ul>
     {% else %}
         <p>There are no posts.</p>
     {% endif %}
+
+    <h2>Categories</h2>
 
 {% endblock %}
