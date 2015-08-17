@@ -1,9 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% load widget_tweaks %}
+    <div class="container">
     <h1>New post</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+    <form method="POST" class="form-inline">{% csrf_token %}
+    <div class="container">
+        <div class="form-group">
+        {% render_field form.title class+="form-control" autofocus="" required="" placeholder="Title" %}
+        {% render_field form.slug class+="form-control" autofocus="" required="" placeholder="Slug" %}
+        </div> 
+        <div class="form-group">
+        {{ form.category }}
+        </div> 
+        <div class="form-group">
+        {{ form.tags }}
+        </div>
+        <button type="submit" class="btn btn-lg btn-success">Save</button>
+    </div>
+        {{ form.body|safe }}
+        
     </form>
+    </div>
 {% endblock %}

@@ -5,8 +5,13 @@
     <h2> {{ post.title }} {{ post.category.title }} 
         <a class="btn btn-default" href="{% url 'blog:post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
     </h2>
+    {% for tag in post.tags.all %}
+    {{ tag.title }}
+    {% empty %}
+        <p>No tags here :(</p>
+    {% endfor%}
     <div>
-        {{ post.body }}
+        {{ post.body|safe }}
     </div>
     {% if post.published_date %}
         {{ post.published_date }}

@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'polls',
     'blog',
+    'widget_tweaks',
+    'django_summernote',
 )
 
 MIDDLEWARE_CLASSES = (

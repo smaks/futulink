@@ -5,6 +5,11 @@
     <h2> {{ post.title }} {{ post.category.title }} 
         <a class="btn btn-default" href="{% url 'blog:post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
     </h2>
+    {% for tag in post.tags.all %}
+    {{ tag.title }}
+    {% empty %}
+        <p>No tags here :(</p>
+    {% endfor%}
     <div>
         {{ post.body }}
     </div>
@@ -21,8 +26,8 @@
             <div class="date">
                 {{ comment.created_date }}
                 {% if not comment.approved %}
-                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                    <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                    <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
                 {% endif %}
             </div>
             <strong>{{ comment.author }}</strong>

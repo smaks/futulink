@@ -1,11 +1,14 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment, Tag
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'slug', 'category', 'tags', 'body',)
+        fields = ('title', 'slug', 'category', 'tags', 'body')
+        tags = forms.MultipleChoiceField(Tag.objects.all(), widget=forms.CheckboxSelectMultiple)
+        widgets = {'body': SummernoteWidget(),}
 
 class CommentForm(forms.ModelForm):
 

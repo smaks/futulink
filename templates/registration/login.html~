@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+{% block head_title %}Loging page{% endblock %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+
+<div class="container">
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    {% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label class="sr-only" for="inputEmail">Email address</label>
+        {% render_field form.username class+="form-control" autofocus="" required="" placeholder="Email address" %}
+        <input id="inputEmail" class="form-control" type="email" autofocus="" required="" placeholder="Email address">
+        <label class="sr-only" for="inputPassword">Password</label>
+        {% render_field form.password class+="form-control" autofocus="" required="" placeholder="Password" %}
+        <input id="inputPassword" class="form-control" type="password" required="" placeholder="Password">
+        <div class="checkbox">
+        <label>
+        <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+</div> <!-- /container -->
+
+{% endblock %}
+
+
+
+

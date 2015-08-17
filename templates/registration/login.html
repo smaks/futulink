@@ -3,25 +3,31 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+{% load widget_tweaks %}
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+<div class="container">
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    {% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label class="sr-only" for="inputEmail">Email address</label>
+        {% render_field form.username class+="form-control" autofocus="" required="" placeholder="Email address" %}
+        <label class="sr-only" for="inputPassword">Password</label>
+        {% render_field form.password class+="form-control" autofocus="" required="" placeholder="Password" %}
+        <div class="checkbox">
+        <label>
+        <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+</div> <!-- /container -->
 
 {% endblock %}
+
+
+
+

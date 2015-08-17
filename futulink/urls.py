@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^$', home, name='home'),
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$', home_files, name='home-files'),
+    url(r'^summernote/', include('django_summernote.urls')),
 
 ]

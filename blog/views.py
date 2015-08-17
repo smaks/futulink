@@ -5,6 +5,7 @@ from django.views import generic
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 
 class BlogIndex(generic.ListView):
@@ -40,11 +41,16 @@ def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         slug=request.POST.get('slug','')
+        tags = request.POST.getlist('tags','')
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+
+              
             #post.published_date = timezone.now()
             post.save()
+            for tag in tags:
+                post.tags.add(tag)
             return redirect(post)
     else:
         form = PostForm()
@@ -96,6 +102,9 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect(post)
+
+
+
 
 #def blog(request):
 #    latest_post_list = Question.objects.order_by('-posted')[:5]
