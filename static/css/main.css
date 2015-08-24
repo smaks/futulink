@@ -36,8 +36,33 @@
     position: relative;
 }
 
+@media (max-width: 768px) {
+    .navbar-header {
+        float: left;
+    }
+    .navbar-nav {
+        float: right;
+    }
+}
 
+#nav-wrapper.affix {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  z-index:10;
+}
 
-
+#row-header h1 {
+    width: 500px;
+    margin: 0px;
+    
+}
+#row-header {
+    border-bottom: 1px black solid;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    height: 120px;
+}
 
 

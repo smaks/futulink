@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'bbase.html' %} 
 {% block head_title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
         <p>No tags here :(</p>
     {% endfor%}
     <div>
-        {{ post.body }}
+        {{ post.body|safe }}
     </div>
     {% if post.published_date %}
         {{ post.published_date }}
